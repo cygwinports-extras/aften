@@ -1,0 +1,17 @@
+inherit cmake
+
+DESCRIPTION="A/52 (AC-3) audio encoder"
+HOMEPAGE="http://aften.sourceforge.net/"
+SRC_URI="mirror://sourceforge/aften/${P}.tar.bz2"
+
+PATCH_URI="0.0.8-get_nprocs.patch
+           0.0.8-visibility.patch"
+
+PKG_NAMES="aften libaften0 libaften-devel libaftenxx0 libaftenxx-devel"
+aften_CONTENTS="usr/bin/*.exe usr/share/doc/"
+libaften0_CONTENTS="usr/bin/cygaften-0.dll"
+libaften_devel_CONTENTS="--exclude=*xx* usr/include/ usr/lib/"
+libaftenxx0_CONTENTS="usr/bin/cygaftenxx-0.dll"
+libaftenxx_devel_CONTENTS="usr/include/aften/aftenxx.h usr/lib/libaftenxx.*"
+
+CYGCMAKE_ARGS="-DSHARED=ON -DBINDINGS_CXX=ON"

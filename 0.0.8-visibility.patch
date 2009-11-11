@@ -1,0 +1,10 @@
+--- origsrc/aften-0.0.8/CMakeModules/CompilerVisibility.cmake	2007-07-08 00:11:52.000000000 -0500
++++ src/aften-0.0.8/CMakeModules/CompilerVisibility.cmake	2009-11-11 00:28:59.478829300 -0600
+@@ -1,6 +1,6 @@
+ MACRO(TEST_COMPILER_VISIBILITY)
+ IF(NOT WIN32 AND NOT CMAKE_COMPILER_IS_ICC)
+-  SET(CMAKE_REQUIRED_FLAGS "-fvisibility=hidden")
++  SET(CMAKE_REQUIRED_FLAGS "-Werror -fvisibility=hidden")
+   CHECK_C_SOURCE_COMPILES(
+ "void __attribute__((visibility(\"default\"))) test() {}
+ #ifdef __INTEL_COMPILER
