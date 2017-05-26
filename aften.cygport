@@ -2,26 +2,32 @@ inherit cmake
 
 NAME="aften"
 VERSION=0.0.8
-RELEASE=1
+RELEASE=2
 CATEGORY="Libs"
 SUMMARY="A/52 (AC-3) audio encoder"
 DESCRIPTION="Aften is an audio encoder which generates compressed audio streams
-based on ATSC A/52 specification. This type of audio is also known as AC-3 or
-Dolby(R) Digital and is one of the audio codecs used in DVD-Video content."
+based on ATSC A/52 specification. This type of audio is also known as AC-3 and
+is one of the audio codecs used in DVD-Video content."
 HOMEPAGE="http://aften.sourceforge.net/"
 SRC_URI="mirror://sourceforge/aften/aften-${VERSION}.tar.bz2"
-
-PATCH_URI="0.0.8-get_nprocs.patch
-           0.0.8-visibility.patch"
+PATCH_URI="0.0.8-visibility.patch"
 
 PKG_NAMES="aften libaften0 libaften-devel libaftenxx0 libaftenxx-devel"
 aften_CATEGORY="Audio"
 aften_CONTENTS="usr/bin/*.exe usr/share/doc/"
 libaften0_CONTENTS="usr/bin/cygaften-0.dll"
-libaften_devel_CONTENTS="--exclude=*xx* usr/include/ usr/lib/"
+libaften_devel_CONTENTS="
+	usr/include/aften/aften-types.h
+	usr/include/aften/aften.h
+	usr/lib/libaften.dll.a
+"
 libaftenxx0_SUMMARY="${SUMMARY} (C++ bindings)"
 libaftenxx0_CONTENTS="usr/bin/cygaftenxx-0.dll"
 libaftenxx_devel_SUMMARY=${libaftenxx0_SUMMARY}
-libaftenxx_devel_CONTENTS="usr/include/aften/aftenxx.h usr/lib/libaftenxx.*"
+libaftenxx_devel_REQUIRES="libaften-devel"
+libaftenxx_devel_CONTENTS="
+	usr/include/aften/aftenxx.h
+	usr/lib/libaftenxx.dll.a
+"
 
 CYGCMAKE_ARGS="-DSHARED=ON -DBINDINGS_CXX=ON"
